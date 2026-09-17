@@ -107,6 +107,79 @@ DocQue supports two LLM provider modes:
 
 This allows the application to work with either a cloud-based model or locally hosted models.
 
+
+🏗️ Architecture
+
+The application follows a RAG pipeline:
+```
+                    ┌──────────────────────┐
+                    │   Upload PDF/DOCX    │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │ Document Ingestion   │
+                    │                      │
+                    │ • Text extraction    │
+                    │ • OCR                │
+                    │ • Tables             │
+                    │ • Images             │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │      Chunking        │
+                    │                      │
+                    │ Token-based chunks   │
+                    │ + overlap             │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                 ┌─────────────────────────────┐
+                 │       Indexing Layer        │
+                 │                             │
+                 │ ChromaDB  +  BM25           │
+                 └─────────────┬───────────────┘
+                               │
+                               │
+            ┌──────────────────┴──────────────────┐
+            │                                     │
+            ▼                                     ▼
+     Semantic Search                         BM25 Search
+     (Embeddings)                            (Keywords)
+            │                                     │
+            └──────────────────┬──────────────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │ Score Fusion         │
+                    │ 60% Vector           │
+                    │ 40% BM25             │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │ Cross-Encoder        │
+                    │ Reranking            │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │ Retrieved Context    │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │ LLM Generation       │
+                    │ Gemini / Ollama      │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │ Answer + Citations   │
+                    └──────────────────────┘
+```
+
 ## 📸 App Walkthrough
 
 Here is a quick look at DocQue in action:
