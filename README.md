@@ -397,7 +397,73 @@ Some document-processing libraries also require system-level dependencies, espec
 
 Install those separately according to your operating system.
 
+## 🔐 Configuration
 
+DocQue uses environment variables for model configuration and API credentials.
+
+Create a file named:
+
+.env
+
+Example:
+
+Choose: gemini or ollama
+
+LLM_PROVIDER=gemini
+
+### Gemini
+
+GEMINI_API_KEY=your_api_key_here
+
+GEMINI_MODEL=your_gemini_model
+
+
+### Ollama
+
+OLLAMA_HOST=http://localhost:11434
+
+OLLAMA_MODEL=llama3.1
+
+OLLAMA_VISION_MODEL=llava
+
+
+### Retrieval
+
+EMBEDDING_MODEL=BAAI/bge-small-en-v1.5
+
+RERANKER_MODEL=cross-encoder/ms-marco-MiniLM-L-6-v2
+
+
+### OCR
+
+OCR_LANG=eng
+
+⚠️ Never commit your real .env
+
+Your .env file may contain an API key.
+
+Add this to .gitignore:
+
+.env
+
+venv/
+
+__pycache__/
+
+*.pyc
+
+
+data/uploads/
+
+data/exports/
+
+chroma_db/
+
+Commit a safe template instead:
+
+.env.example
+
+with placeholder values.
 
 
 
