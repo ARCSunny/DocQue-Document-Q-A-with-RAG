@@ -180,6 +180,119 @@ The application follows a RAG pipeline:
                     └──────────────────────┘
 ```
 
+## 🧠 How the RAG Pipeline Works
+
+### 1. Ingestion
+
+When a PDF or DOCX file is uploaded, DocQue extracts useful information from it.
+
+For PDFs, the system can identify:
+
+- Normal text
+- Scanned text
+- Tables
+- Embedded images
+
+Scanned pages are passed through Tesseract OCR.
+
+Images can be passed to a vision-capable LLM to generate textual descriptions.
+
+### 2. Chunking
+
+Large extracted documents are divided into smaller pieces called chunks.
+
+The default configuration is:
+
+Chunk size:       512 tokens
+Chunk overlap:     64 tokens
+Table chunk size: 1024 tokens
+
+The overlap helps preserve context between neighboring chunks.
+
+### 3. Embeddings
+
+Each chunk is converted into a numerical vector using:
+
+BAAI/bge-small-en-v1.5
+
+These vectors are stored in ChromaDB.
+
+This allows semantic searches such as:
+
+Question:
+"What caused the company's profit to decline?"
+
+Document:
+"Net income decreased primarily because operating expenses
+increased during the reporting period."
+
+Even though the wording is different, semantic retrieval can identify the relevant passage
+
+### 4. BM25 Search
+
+DocQue also performs keyword-based retrieval using BM25.
+
+This is particularly useful when a question contains:
+
+- Specific names
+- Technical terms
+- Product names
+- Numbers
+- Exact phrases
+- Document-specific terminology
+
+The combination of semantic and keyword retrieval makes the search less dependent on either approach alone.
+
+### 5. Score Fusion
+
+Vector and BM25 scores are normalized and combined.
+
+The default formula is effectively:
+
+Fused Score =
+    0.6 × Vector Score
+  + 0.4 × BM25 Score
+
+The highest-scoring candidates are passed to the next stage.
+
+### 6. Reranking
+
+The retrieved candidates are then evaluated by the cross-encoder:
+
+cross-encoder/ms-marco-MiniLM-L-6-v2
+
+The reranker considers both:
+
+Question + Retrieved Passage
+
+and produces a relevance score.
+
+The top results are then used as context for the LLM.
+
+### 7. Answer Generation
+
+The LLM receives:
+
+- Recent conversation history
+- Retrieved document excerpts
+- The user's question
+
+The system prompt instructs the model to:
+
+- Answer only from the supplied context.
+- Avoid using outside knowledge.
+- Cite factual claims using source numbers.
+- Say when the uploaded documents do not contain enough information.
+- Avoid guessing or fabricating information.
+
+
+
+
+
+
+
+
+
 ## 📸 App Walkthrough
 
 Here is a quick look at DocQue in action:
