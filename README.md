@@ -304,6 +304,74 @@ The system prompt instructs the model to:
 | Environment variables | python-dotenv |
 | Programming language | Python |
 
+## 📁 Project Structure
+
+A clean repository layout for the application is:
+```
+DocQue/
+│
+├── app.py                  # Main Streamlit application (runs at root)
+├── requirements.txt
+├── .env.example
+├── .gitignore
+├── README.md
+│
+├── images/                 # App walkthrough screenshots
+│   ├── 1.PNG
+│   ├── 2.PNG
+│   ├── 3.PNG
+│   ├── 4.PNG
+│   ├── 5.PNG
+│   └── 6.PNG
+│
+├── src/                    # Backend package
+│   ├── __init__.py
+│   ├── config.py           # Application configuration
+│   ├── ingestion.py        # PDF/DOCX ingestion
+│   ├── extraction.py       # Cross-document search
+│   ├── chunking.py         # Text chunking
+│   ├── indexing.py         # ChromaDB + BM25 indexing
+│   ├── retrieval.py        # Hybrid retrieval + reranking
+│   ├── generation.py       # LLM answer generation
+│   ├── llm_client.py       # Gemini/Ollama integration
+│   └── memory.py           # Conversation memory
+│
+├── data/                   # Local data (ignored by git)
+│   ├── uploads/
+│   └── exports/
+│
+└── chroma_db/              # Vector stores (ignored by git)
+    ├── chroma.sqlite3
+    └── bm25_store.pkl
+```
+## 💻 Requirements
+
+Before running DocQue, install:
+
+- Python 3.10+ recommended
+- pip
+- Git
+- Tesseract OCR
+- Ghostscript
+- Internet access for downloading Python/model dependencies
+- A Gemini API key or a local Ollama installation
+
+###  Hardware
+
+The exact requirements depend heavily on the number and size of documents and the selected models.
+
+For larger document collections, embedding and reranking models can consume significant RAM and CPU/GPU resources.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
