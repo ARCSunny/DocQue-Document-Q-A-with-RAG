@@ -578,6 +578,139 @@ Enter a keyword or phrase.
 
 The application searches across indexed documents and groups matching sections by file.
 
+## 🧩 Main Modules
+
+### ingestion.py
+
+Responsible for extracting information from PDF and DOCX files.
+
+Handles:
+
+- PDF text
+- OCR
+- PDF tables
+- PDF images
+- DOCX paragraphs
+- DOCX tables
+- DOCX embedded images
+
+### chunking.py
+
+Converts extracted raw units into searchable chunks.
+
+It uses token-based splitting with configurable overlap.
+
+### indexing.py
+
+Responsible for storing and maintaining searchable document data.
+
+Uses:
+
+- ChromaDB for vector search
+- BM25 for keyword search
+- Sentence Transformers for embeddings
+
+It also persists the BM25 index locally.
+
+### retrieval.py
+
+Implements hybrid retrieval.
+```
+Pipeline:
+
+Query
+ ↓
+Vector Search
+ ↓
+BM25 Search
+ ↓
+Score Normalization
+ ↓
+Score Fusion
+ ↓
+Top-K Candidates
+ ↓
+Cross-Encoder Reranking
+ ↓
+Top-N Results
+```
+### generation.py
+
+Responsible for producing the final answer.
+
+It:
+
+(1) Formats retrieved chunks as context.
+
+(2) Adds recent conversation history.
+
+(3) Sends the prompt to the selected LLM.
+
+(4) Builds citation metadata.
+
+(5) Returns the generated answer.
+
+### llm_client.py
+
+Provides a common interface for:
+
+Gemini
+
+Ollama
+
+The rest of the application can call:
+
+complete(...)
+
+without needing to know which LLM provider is currently configured.
+
+It also provides image-description functionality for document images.
+
+### memory.py
+
+Stores recent conversation turns.
+
+The configured memory limit is:
+
+6 conversation turns
+
+This prevents the conversation history from growing indefinitely.
+
+### config.py
+
+Contains configurable application settings such as:
+
+Embedding model
+
+Reranker model
+
+Retrieval top-K
+
+Rerank top-N
+
+Vector/BM25 weights
+
+Chunk size
+
+Chunk overlap
+
+OCR language
+
+OCR DPI
+
+Conversation memory
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
