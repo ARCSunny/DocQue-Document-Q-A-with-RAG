@@ -31,7 +31,7 @@ pandas==2.2.2
 camelot-py==0.11.0    # table extraction (requires ghostscript)
 
 # Utilities
-tiktoken==0.7.0
+tiktoken>=0.7.0
 numpy==1.26.4
 python-dotenv==1.0.1
 tenacity==8.5.0
