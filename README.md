@@ -700,18 +700,188 @@ OCR DPI
 
 Conversation memory
 
+## ⚙️ Default Retrieval Configuration
+
+The current configuration uses:
+
+Embedding Model:
+
+BAAI/bge-small-en-v1.5
+
+Reranker:
+
+cross-encoder/ms-marco-MiniLM-L-6-v2
+
+Initial retrieval:
+
+Top 20
+
+Final reranked results:
+
+Top 5
+
+Vector weight:
+
+0.60
+
+BM25 weight:
+
+0.40
+
+Chunk size:
+
+512 tokens
+
+Chunk overlap:
+
+64 tokens
+
+Table chunk size:
+
+1024 tokens
+
+These values can be adjusted in config.py or through environment/configuration changes where supported.
+
+## 🗃️ Data Storage
+
+DocQue currently uses local persistent storage.
+
+### Uploaded documents
+
+data/uploads/
+
+### Export directory
+
+data/exports/
+
+### ChromaDB
+
+chroma_db/
+
+### BM25 persistence
+
+chroma_db/bm25_store.pkl
+
+## 🔒 Privacy & Security
+
+DocQue processes uploaded documents locally for extraction and retrieval.
+
+However, when using a cloud LLM such as Gemini, retrieved document context and images may be sent to the configured cloud model for generation or image description.
+
+If privacy is critical, consider using a suitable local LLM through Ollama and review the policies/configuration of every external service you enable.
+
+Security recommendations:
+
+- Never commit .env.
+- Never expose API keys in source code.
+- Do not commit private documents.
+- Do not commit chroma_db/ if it contains private indexed content.
+- Use environment variables for credentials.
+- Rotate an API key immediately if it is accidentally exposed.
+
+## 🐛 Troubleshooting
+
+### ModuleNotFoundError: No module named 'src'
+
+The application imports modules using:
+
+from src.config import settings
+
+Make sure the Python modules are inside a src/ package and that it contains:
+
+src/__init__.py
+
+Alternatively, change the imports to match a flat project structure.
+
+### Tesseract OCR error
+
+If scanned PDFs cannot be processed, verify that Tesseract OCR is installed and available on your system PATH.
+
+You can test it from a terminal:
+
+tesseract --version
+
+### Camelot / table extraction errors
+
+Some table extraction workflows require Ghostscript.
+
+Verify that Ghostscript is installed and accessible from the system.
+
+### Gemini API errors
+
+Check:
+
+LLM_PROVIDER=gemini
+
+GEMINI_API_KEY=...
+
+GEMINI_MODEL=...
 
 
+Also verify that:
 
+- The API key is valid.
+- The selected model is available to your account.
+- You have not exceeded the provider's quota or rate limits.
 
+### Ollama connection error
 
+Verify that Ollama is running and that:
 
+OLLAMA_HOST=http://localhost:11434
 
+matches the actual Ollama server address.
 
+### Slow indexing
 
+Indexing can be CPU/RAM intensive because the application may perform:
 
+- PDF parsing
+- OCR
+- Image extraction
+- Vision-model processing
+- Embedding generation
+- BM25 indexing
 
+Large PDFs or large document collections can therefore take considerable time.
 
+## 🚧 Known Limitations
+
+The current implementation has several practical limitations:
+
+- OCR currently defaults to English (eng).
+- Document indexes are stored locally.
+- BM25 data is maintained as a local pickle file.
+- Retrieval quality depends on chunk size, embeddings, BM25 weighting, and reranking.
+- Large document collections can require substantial RAM and processing time.
+- Cloud LLM usage may be subject to API quotas and rate limits.
+- DOCX page numbers are not equivalent to physical Word document page numbers because DOCX parsing does not directly preserve rendered page layout.
+- Image understanding depends on the selected vision-capable model/provider.
+- The application currently focuses on PDF and DOCX rather than supporting every document format.
+
+## 🔮 Future Improvements
+
+Potential improvements include:
+
+- Support more document formats such as TXT, PPTX, XLSX, and HTML.
+- Add authentication and user accounts.
+- Add document-level permissions.
+-Add persistent chat sessions.
+- Add conversation export.
+- Add streaming LLM responses.
+- Improve table-aware retrieval.
+- Improve multilingual OCR.
+- Add configurable retrieval weights through the UI.
+- Add document metadata filters.
+- Add document preview.
+- Add page-level PDF preview for citations.
+- Add evaluation datasets for measuring retrieval quality.
+- Add automated RAG evaluation metrics.
+- Add GPU acceleration where available.
+- Add Docker support.
+- Add automated tests and CI/CD.
+- Improve duplicate-document detection.
+- Add database-backed user/document management.
 
 
 
