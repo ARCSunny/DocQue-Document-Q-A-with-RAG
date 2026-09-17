@@ -26,21 +26,19 @@ DocQue uses several extraction strategies depending on the content of the PDF:
 
 This makes the application useful for more than simple text-only PDFs.
 
-🔎 Hybrid Retrieval
+###🔎 Hybrid Retrieval
 
 DocQue combines two different search approaches:
 
-Semantic/vector search
+(1) Semantic/vector search
 
-Uses BAAI/bge-small-en-v1.5
+- Uses BAAI/bge-small-en-v1.5
+- Finds passages based on semantic meaning.
 
-Finds passages based on semantic meaning.
+(2) Keyword search
 
-Keyword search
-
-Uses BM25
-
-Finds passages containing important matching terms.
+- Uses BM25
+- Finds passages containing important matching terms.
 
 The results are combined using weighted score fusion.
 
@@ -49,7 +47,7 @@ Default weighting:
 Vector similarity: 60%
 BM25 keyword search: 40%
 
-🎯 Cross-Encoder Reranking
+### 🎯 Cross-Encoder Reranking
 
 After the initial hybrid retrieval stage, candidate passages can be reranked using:
 
