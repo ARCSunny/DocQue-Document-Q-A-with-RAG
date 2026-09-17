@@ -362,9 +362,37 @@ The exact requirements depend heavily on the number and size of documents and th
 
 For larger document collections, embedding and reranking models can consume significant RAM and CPU/GPU resources.
 
+## 🚀 Installation
 
+### 1. Clone the repository
 
+git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+cd YOUR_REPOSITORY
 
+Replace the URL with your repository URL.
+
+### 2. Create a virtual environment
+
+### Windows
+
+python -m venv venv
+venv\Scripts\activate
+
+### macOS / Linux
+
+python3 -m venv venv
+source venv/bin/activate
+
+### 3. Install Python dependencies
+
+pip install -r requirements.txt
+
+Some document-processing libraries also require system-level dependencies, especially:
+
+- Tesseract OCR
+- Ghostscript
+
+Install those separately according to your operating system.
 
 
 
