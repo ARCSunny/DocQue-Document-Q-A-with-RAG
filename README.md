@@ -883,8 +883,6 @@ Potential improvements include:
 - Improve duplicate-document detection.
 - Add database-backed user/document management.
 
-
-
 ## 📸 App Walkthrough
 
 Here is a quick look at DocQue in action:
@@ -919,4 +917,8 @@ Quickly find specific phrases, data points, or concepts across your entire docum
 
 ![image alt](https://github.com/ARCSunny/DocQue-Document-Q-A-with-RAG/blob/f6e3fe90ee4a362b85bae9a5e8cc54e1a83eb149/images/search-tab.PNG)
 
+## ⭐ If You Find This Project Useful
 
+If this project helps you learn about RAG, document processing, semantic search, or LLM applications, consider giving the repository a ⭐ on GitHub.
+
+Built with Python, Streamlit, ChromaDB, Sentence Transformers, BM25, and modern LLM tooling.
