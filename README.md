@@ -285,7 +285,24 @@ The system prompt instructs the model to:
 - Say when the uploaded documents do not contain enough information.
 - Avoid guessing or fabricating information.
 
-
+## 🛠️ Technology Stack
+| Component | Technology |
+|---|---|
+| Frontend / UI | Streamlit |
+| RAG architecture | Custom Python pipeline |
+| LLM | Google Gemini / Ollama |
+| Vector database | ChromaDB |
+| Embeddings | Sentence Transformers |
+| Embedding model | `BAAI/bge-small-en-v1.5` |
+| Keyword retrieval | Rank-BM25 |
+| Reranking | Cross-Encoder |
+| PDF text extraction | pdfplumber / PyMuPDF |
+| OCR | Tesseract |
+| DOCX parsing | python-docx |
+| Table processing | pandas / pdfplumber / Camelot |
+| Tokenization | tiktoken |
+| Environment variables | python-dotenv |
+| Programming language | Python |
 
 
 
