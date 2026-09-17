@@ -465,11 +465,118 @@ Commit a safe template instead:
 
 with placeholder values.
 
+### 🤖 Option 1 — Google Gemini
+
+Set:
+
+LLM_PROVIDER=gemini
+
+GEMINI_API_KEY=your_api_key_here
+
+GEMINI_MODEL=your_model_name
+
+The application uses Gemini for:
+
+- Text generation
+- Image understanding / image description
+
+A valid Google AI Studio API key is required.
+
+Model names and API quotas can change over time. Use a currently supported Gemini model in your environment rather than assuming an older model name will remain available.
+
+### 🦙 Option 2 — Ollama
+
+If you prefer local models, install Ollama and run the models you want to use.
+
+Example configuration:
+
+LLM_PROVIDER=ollama
+
+OLLAMA_HOST=http://localhost:11434
+
+OLLAMA_MODEL=llama3.1
+
+OLLAMA_VISION_MODEL=llava
 
 
+Then make sure Ollama is running before launching the application.
 
+The Ollama option can reduce dependence on a cloud LLM API, although local model performance and hardware requirements vary.
 
+## ▶️ Running the Application
 
+From the project root:
+
+streamlit run app.py
+
+Streamlit will start a local development server.
+
+Open the URL displayed in the terminal, typically:
+
+http://localhost:8501
+
+## 📖 How to Use DocQue
+
+### Step 1 — Upload Documents
+
+Open:
+
+📤 Upload & Index
+
+Select one or more:
+
+.pdf
+.docx
+
+Then click:
+
+Ingest & Index
+
+DocQue will:
+```
+Upload
+   ↓
+Extract
+   ↓
+OCR if required
+   ↓
+Extract tables/images
+   ↓
+Chunk
+   ↓
+Generate embeddings
+   ↓
+Store in ChromaDB
+   ↓
+Build BM25 index
+```
+### Step 2 — Ask Questions
+
+Open:
+
+💬 Chat
+
+Type a question about your indexed documents.
+
+The application retrieves relevant passages and sends those passages to the configured LLM.
+
+### Step 3 — Inspect Sources
+
+When an answer has citations, expand:
+
+Sources
+
+You can see the source document, page, content type, and a text snippet.
+
+### Step 4 — Search Documents Directly
+
+Open:
+
+🔎 Search
+
+Enter a keyword or phrase.
+
+The application searches across indexed documents and groups matching sections by file.
 
 
 
