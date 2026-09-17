@@ -1,0 +1,37 @@
+# Core app
+streamlit==1.38.0
+
+# RAG orchestration
+llama-index-core==0.11.14
+llama-index-embeddings-huggingface==0.3.1
+llama-index-vector-stores-chroma==0.2.1
+llama-index-llms-openai==0.2.9
+llama-index-llms-anthropic==0.3.1
+google-genai==0.3.0
+ollama==0.3.3
+
+# Vector store & embeddings
+chromadb==0.5.5
+sentence-transformers==3.1.1
+
+# Hybrid / keyword search
+rank-bm25==0.2.2
+
+# Reranking
+# (cross-encoder ships inside sentence-transformers)
+
+# Document parsing
+pypdf==4.3.1
+pdfplumber==0.11.4
+PyMuPDF==1.24.10          # fitz - page rasterization, image extraction
+python-docx==1.1.2
+pytesseract==0.3.13       # OCR - requires system package `tesseract-ocr`
+Pillow==10.4.0
+pandas==2.2.2
+camelot-py==0.11.0    # table extraction (requires ghostscript)
+
+# Utilities
+tiktoken==0.7.0
+numpy==1.26.4
+python-dotenv==1.0.1
+tenacity==8.5.0
