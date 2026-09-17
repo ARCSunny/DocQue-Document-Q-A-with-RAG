@@ -26,7 +26,7 @@ DocQue uses several extraction strategies depending on the content of the PDF:
 
 This makes the application useful for more than simple text-only PDFs.
 
-###🔎 Hybrid Retrieval
+### 🔎 Hybrid Retrieval
 
 DocQue combines two different search approaches:
 
@@ -108,7 +108,7 @@ DocQue supports two LLM provider modes:
 This allows the application to work with either a cloud-based model or locally hosted models.
 
 
-🏗️ Architecture
+## 🏗️ Architecture
 
 The application follows a RAG pipeline:
 ```
