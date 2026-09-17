@@ -371,18 +371,19 @@ git clone https://github.com/ARCSunny/DocQue-Document-Q-A-with-RAG
 
 cd DocQue-Document-Q-A-with-RAG
 
-Replace the URL with your repository URL.
 
 ### 2. Create a virtual environment
 
 ### Windows
 
 python -m venv venv
+
 venv\Scripts\activate
 
 ### macOS / Linux
 
 python3 -m venv venv
+
 source venv/bin/activate
 
 ### 3. Install Python dependencies
