@@ -55,7 +55,7 @@ cross-encoder/ms-marco-MiniLM-L-6-v2
 
 This helps prioritize passages that are more directly relevant to the user's question.
 
-💬 Conversational Document Q&A
+### 💬 Conversational Document Q&A
 
 Users can ask questions naturally, for example:
 
@@ -69,23 +69,19 @@ Which document contains information about the project deadline?
 
 The application keeps a limited amount of recent conversation history so follow-up questions can be handled in context.
 
-📚 Multi-Document Search
+### 📚 Multi-Document Search
 
 The Search tab allows users to search across all indexed documents.
 
 Results are grouped by source document and display:
 
-File name
+- File name
+- Page number
+- Content type
+- Retrieved text
+- Retrieval score
 
-Page number
-
-Content type
-
-Retrieved text
-
-Retrieval score
-
-📑 Source Citations
+### 📑 Source Citations
 
 Generated answers include citations such as:
 
@@ -95,23 +91,19 @@ Generated answers include citations such as:
 
 The UI also provides the corresponding:
 
-File name
-
-Page number
-
-Source/unit type
-
-Text snippet
+- File name
+- Page number
+- Source/unit type
+- Text snippet
 
 This makes it easier to trace an answer back to the uploaded documents.
 
-🤖 Multiple LLM Providers
+### 🤖 Multiple LLM Providers
 
 DocQue supports two LLM provider modes:
 
-Google Gemini
-
-Ollama
+- Google Gemini
+- Ollama
 
 This allows the application to work with either a cloud-based model or locally hosted models.
 
