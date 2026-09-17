@@ -366,8 +366,10 @@ For larger document collections, embedding and reranking models can consume sign
 
 ### 1. Clone the repository
 
-git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
-cd YOUR_REPOSITORY
+git clone https://github.com/ARCSunny/DocQue-Document-Q-A-with-RAG
+.git
+
+cd DocQue-Document-Q-A-with-RAG
 
 Replace the URL with your repository URL.
 
